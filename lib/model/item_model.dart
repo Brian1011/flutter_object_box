@@ -10,5 +10,5 @@ class ItemModel {
   int itemCount;
 
   final orderModel = ToOne<OrderModel>();
-  ItemModel.name(this.itemName, this.itemCount);
+  ItemModel({required this.itemName, required this.itemCount});
 }
