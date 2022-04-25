@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => OrderScreen(
-                            orderBox: orderBox, orderModel: orderModel)));
+                            orderModel: orderModel, orderBox: orderBox!)));
               },
               child: const Text("Create your order"))
         ],
