@@ -27,8 +27,32 @@ class _OrderScreenState extends State<OrderScreen> {
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Make order"),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Column(
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  widget.orderModel?.ordered = true;
+                  widget.orderBox.put(widget.orderModel!);
+                  Navigator.pop(context);
+                },
+                child: const Text('Confirm'))
+          ],
+        ),
+      ),
+    );
   }
 
   void saveOrderModel(int index) {
