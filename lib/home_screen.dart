@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:object_box_project/model/item_model.dart';
 import 'package:object_box_project/model/order_model.dart';
@@ -21,14 +19,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
+    addDefaultOrder() {
+      OrderModel orderModel = OrderModel(ordered: true);
+      int? recordId = orderBox?.put(orderModel);
+      print('*******************RECORD');
+      print(recordId);
+    }
+
     // open store
     openStore().then((Store store) {
       _store = store;
-      var syncServerIp = Platform.isAndroid ? '10.2.2.2' : '127.0.0.1';
-      Sync.client(store, 'ws:$syncServerIp : 9999', SyncCredentials.none());
+      // var syncServerIp = Platform.isAndroid ? '10.2.2.2' : '127.0.0.1';
+      // Sync.client(store, 'ws//:$syncServerIp:9999', SyncCredentials.none());
+      orderBox = _store?.box<OrderModel>();
+      debugPrint(orderBox?.count().toString());
+      addDefaultOrder();
+      debugPrint(orderBox?.count().toString());
     });
-
-    orderBox = _store?.box<OrderModel>();
   }
 
   @override
@@ -37,26 +45,30 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Order App Demo'),
       ),
-      body: Column(
-        children: [
-          const Text(
-            "Welcome to our restaurant",
-            style: TextStyle(fontSize: 18),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                final orderModel = OrderModel();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => OrderScreen(
-                            orderModel: orderModel, orderBox: orderBox!)));
-              },
-              child: const Text("Create your order"))
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              "Welcome to our restaurant",
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  final orderModel = OrderModel();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OrderScreen(
+                              orderModel: orderModel, orderBox: orderBox!)));
+                },
+                child: const Text("Create your order"))
+          ],
+        ),
       ),
     );
   }

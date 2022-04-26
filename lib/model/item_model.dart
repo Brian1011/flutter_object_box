@@ -3,7 +3,7 @@ import 'package:object_box_project/model/order_model.dart';
 import 'package:objectbox/objectbox.dart';
 
 @Entity()
-@Sync()
+//@Sync()
 class ItemModel {
   int id = 0;
   String itemName;

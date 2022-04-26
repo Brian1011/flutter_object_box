@@ -23,7 +23,7 @@ final _entities = <ModelEntity>[
       id: const IdUid(1, 5837345530982176847),
       name: 'ItemModel',
       lastPropertyId: const IdUid(4, 4675896044637212614),
-      flags: 2,
+      flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
             id: const IdUid(1, 8068208404009959351),
@@ -54,7 +54,7 @@ final _entities = <ModelEntity>[
       id: const IdUid(2, 5131040421273570621),
       name: 'OrderModel',
       lastPropertyId: const IdUid(2, 6586738397162032563),
-      flags: 2,
+      flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
             id: const IdUid(1, 1349104098592683453),
@@ -161,10 +161,10 @@ ModelDefinition getObjectBoxModel() {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
 
-          final object = OrderModel()
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
-            ..ordered =
-                const fb.BoolReader().vTableGet(buffer, rootOffset, 6, false);
+          final object = OrderModel(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              ordered: const fb.BoolReader()
+                  .vTableGet(buffer, rootOffset, 6, false));
           InternalToManyAccess.setRelInfo(
               object.items,
               store,
