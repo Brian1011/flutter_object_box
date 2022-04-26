@@ -21,18 +21,22 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     addDefaultOrder() {
+      // save default order
       OrderModel orderModel = OrderModel(ordered: true);
+
+      // returns primary id
       int? recordId = orderBox?.put(orderModel);
-      print('*******************RECORD');
-      print(recordId);
     }
 
     // open store
     openStore().then((Store store) {
       _store = store;
-      // var syncServerIp = Platform.isAndroid ? '10.2.2.2' : '127.0.0.1';
-      // Sync.client(store, 'ws//:$syncServerIp:9999', SyncCredentials.none());
+
+      // initialize orderBox
       orderBox = _store?.box<OrderModel>();
+
+      // print values
+      // count checks number of records that exists
       debugPrint(orderBox?.count().toString());
       addDefaultOrder();
       debugPrint(orderBox?.count().toString());
