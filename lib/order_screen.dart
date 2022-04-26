@@ -15,7 +15,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  // set item models
+  // set default items
   List<ItemModel> items = [
     ItemModel(itemCount: 0, itemName: 'Pizza Salami'),
     ItemModel(itemCount: 0, itemName: 'Pizza Margaretta'),
@@ -58,10 +58,12 @@ class _OrderScreenState extends State<OrderScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            // increase quantity by one
                             ElevatedButton(
                               onPressed: () {
                                 items[index].itemCount++;
-                                saveOrderModel(index);
+                                setState(() {});
+                                //saveOrderModel(index);
                               },
                               child: const Icon(Icons.add),
                             ),
@@ -73,11 +75,14 @@ class _OrderScreenState extends State<OrderScreen> {
                                 style: const TextStyle(fontSize: 18),
                               ),
                             ),
+                            // decrease quantity by one
                             ElevatedButton(
                               onPressed: () {
+                                // Negative values are not allowed
                                 if (items[index].itemCount == 0) return;
                                 items[index].itemCount--;
-                                saveOrderModel(index);
+                                setState(() {});
+                                //saveOrderModel(index);
                               },
                               child: const Icon(Icons.remove),
                             )
@@ -107,7 +112,13 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   void saveOrderModel(int index) {
+    // add that item to the orderModel
     widget.orderModel?.items.add(items[index]);
+    // print length
+    widget.orderModel?.items.toList().forEach((element) {
+      print(element.itemName);
+    });
+    // update order box
     widget.orderBox.put(widget.orderModel!);
     setState(() {});
   }
