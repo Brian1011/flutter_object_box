@@ -15,6 +15,7 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  // set item models
   List<ItemModel> items = [
     ItemModel(itemCount: 0, itemName: 'Pizza Salami'),
     ItemModel(itemCount: 0, itemName: 'Pizza Margaretta'),
@@ -42,6 +43,56 @@ class _OrderScreenState extends State<OrderScreen> {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Column(
           children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ListView.separated(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          items[index].itemName,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                items[index].itemCount++;
+                                saveOrderModel(index);
+                              },
+                              child: const Icon(Icons.add),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: Text(
+                                items[index].itemCount.toString(),
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (items[index].itemCount == 0) return;
+                                items[index].itemCount--;
+                                saveOrderModel(index);
+                              },
+                              child: const Icon(Icons.remove),
+                            )
+                          ],
+                        )
+                      ],
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(height: 10);
+                  },
+                  itemCount: items.length,
+                ),
+              ),
+            ),
             ElevatedButton(
                 onPressed: () {
                   widget.orderModel?.ordered = true;
