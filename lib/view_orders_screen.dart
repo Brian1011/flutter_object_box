@@ -29,10 +29,24 @@ class _ViewOrdersScreenState extends State<ViewOrdersScreen> {
                     // get single item per index
                     OrderModel order = orders[index];
                     return Container(
+                      color: index % 2 == 0 ? Colors.white : Colors.grey[300],
                       padding: const EdgeInsets.symmetric(
                           horizontal: 5, vertical: 5),
                       child: ExpansionTile(
-                        title: Text("Order no. #${order.id}"),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Order no. #${order.id}"),
+                          ],
+                        ),
+                        children: [
+                          ...order.items
+                              .map((orderItem) => ListTile(
+                                    title: Text(
+                                        "${orderItem.itemName} (${orderItem.itemCount})"),
+                                  ))
+                              .toList()
+                        ],
                       ),
                     );
                   }))
