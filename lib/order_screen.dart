@@ -121,7 +121,7 @@ class _OrderScreenState extends State<OrderScreen> {
     widget.orderBox.put(widget.orderModel!);
     setState(() {});
     _showTopFlash();
-    //Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   void _showTopFlash({FlashBehavior style = FlashBehavior.floating}) {
