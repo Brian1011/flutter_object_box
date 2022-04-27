@@ -70,7 +70,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (context) => OrderScreen(
                               orderModel: orderModel, orderBox: orderBox!)));
                 },
-                child: const Text("Create your order"))
+                child: const Text("Create your order")),
+            ElevatedButton(
+                onPressed: () {
+                  final orderModel = OrderModel();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OrderScreen(
+                              orderModel: orderModel, orderBox: orderBox!)));
+                },
+                child: const Text("View orders"))
           ],
         ),
       ),
