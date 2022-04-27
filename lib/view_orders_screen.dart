@@ -29,7 +29,7 @@ class _ViewOrdersScreenState extends State<ViewOrdersScreen> {
                     // get single item per index
                     OrderModel order = orders[index];
                     return Container(
-                      color: index % 2 == 0 ? Colors.white : Colors.grey[300],
+                      color: index % 2 == 0 ? Colors.white : Colors.grey[200],
                       padding: const EdgeInsets.symmetric(
                           horizontal: 5, vertical: 5),
                       child: ExpansionTile(
