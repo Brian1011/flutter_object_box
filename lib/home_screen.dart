@@ -22,8 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     addDefaultOrder() {
-      // save default order
+      // save a default order
       OrderModel orderModel = OrderModel(ordered: true);
+      orderModel.items.add(ItemModel(itemName: "Water", itemCount: 0));
 
       // returns primary id
       int? recordId = orderBox?.put(orderModel);

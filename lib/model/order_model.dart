@@ -10,5 +10,8 @@ class OrderModel {
   @Backlink()
   final items = ToMany<ItemModel>();
 
-  OrderModel({this.id = 0, this.ordered = false});
+  OrderModel({
+    this.id = 0,
+    this.ordered = false,
+  });
 }
