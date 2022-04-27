@@ -1,3 +1,4 @@
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:object_box_project/model/order_model.dart';
 import 'package:object_box_project/objectbox.g.dart';
@@ -119,6 +120,44 @@ class _OrderScreenState extends State<OrderScreen> {
     // update order box
     widget.orderBox.put(widget.orderModel!);
     setState(() {});
-    Navigator.pop(context);
+    _showTopFlash();
+    //Navigator.pop(context);
+  }
+
+  void _showTopFlash({FlashBehavior style = FlashBehavior.floating}) {
+    showFlash(
+      context: context,
+      duration: const Duration(seconds: 2),
+      //persistent: true,
+      builder: (_, controller) {
+        return Flash(
+          controller: controller,
+          backgroundColor: Colors.black,
+          brightness: Brightness.light,
+          boxShadows: const [BoxShadow(blurRadius: 4)],
+          barrierBlur: 3.0,
+          barrierColor: Colors.black38,
+          barrierDismissible: true,
+          behavior: style,
+          position: FlashPosition.bottom,
+          child: FlashBar(
+            title: const Text(
+              'Success',
+              style: TextStyle(color: Colors.white),
+            ),
+            content: const Text(
+              'Order placed successfully',
+              style: TextStyle(color: Colors.white),
+            ),
+            //showProgressIndicator: true,
+            primaryAction: TextButton(
+              onPressed: () => controller.dismiss(),
+              child:
+                  const Text('DISMISS', style: TextStyle(color: Colors.amber)),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
