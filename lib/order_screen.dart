@@ -2,6 +2,7 @@ import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:object_box_project/model/order_model.dart';
 import 'package:object_box_project/objectbox.g.dart';
+import 'package:object_box_project/view_orders_screen.dart';
 
 import 'model/item_model.dart';
 
@@ -121,7 +122,8 @@ class _OrderScreenState extends State<OrderScreen> {
     widget.orderBox.put(widget.orderModel!);
     setState(() {});
     _showTopFlash();
-    Navigator.pop(context);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ViewOrdersScreen()));
   }
 
   void _showTopFlash({FlashBehavior style = FlashBehavior.floating}) {
