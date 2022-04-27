@@ -3,6 +3,7 @@ import 'package:object_box_project/model/item_model.dart';
 import 'package:object_box_project/model/order_model.dart';
 import 'package:object_box_project/objectbox.g.dart';
 import 'package:object_box_project/order_screen.dart';
+import 'package:object_box_project/view_orders_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -61,26 +62,33 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-                onPressed: () {
-                  final orderModel = OrderModel();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OrderScreen(
-                              orderModel: orderModel, orderBox: orderBox!)));
-                },
-                child: const Text("Create your order")),
-            ElevatedButton(
-                onPressed: () {
-                  final orderModel = OrderModel();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OrderScreen(
-                              orderModel: orderModel, orderBox: orderBox!)));
-                },
-                child: const Text("View orders"))
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      final orderModel = OrderModel();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrderScreen(
+                                  orderModel: orderModel,
+                                  orderBox: orderBox!)));
+                    },
+                    child: const Text("Create your order")),
+                const SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ViewOrdersScreen()));
+                    },
+                    child: const Text("View orders"))
+              ],
+            ),
           ],
         ),
       ),
