@@ -63,7 +63,6 @@ class _OrderScreenState extends State<OrderScreen> {
                               onPressed: () {
                                 items[index].itemCount++;
                                 setState(() {});
-                                //saveOrderModel(index);
                               },
                               child: const Icon(Icons.add),
                             ),
@@ -82,7 +81,6 @@ class _OrderScreenState extends State<OrderScreen> {
                                 if (items[index].itemCount == 0) return;
                                 items[index].itemCount--;
                                 setState(() {});
-                                //saveOrderModel(index);
                               },
                               child: const Icon(Icons.remove),
                             )
@@ -99,21 +97,21 @@ class _OrderScreenState extends State<OrderScreen> {
               ),
             ),
             ElevatedButton(
-                onPressed: () {
-                  widget.orderModel?.ordered = true;
-                  widget.orderBox.put(widget.orderModel!);
-                  Navigator.pop(context);
-                },
-                child: const Text('Confirm'))
+                onPressed: saveOrderModel, child: const Text('Confirm'))
           ],
         ),
       ),
     );
   }
 
-  void saveOrderModel(int index) {
+  void saveOrderModel() {
+    // fetch all items whose quantity is greater than 0
+    List<ItemModel> orderedItems =
+        items.where((element) => element.itemCount > 0).toList();
+
     // add that item to the orderModel
-    widget.orderModel?.items.add(items[index]);
+    widget.orderModel?.items.addAll(orderedItems);
+
     // print length
     widget.orderModel?.items.toList().forEach((element) {
       print(element.itemName);
@@ -121,5 +119,6 @@ class _OrderScreenState extends State<OrderScreen> {
     // update order box
     widget.orderBox.put(widget.orderModel!);
     setState(() {});
+    Navigator.pop(context);
   }
 }
