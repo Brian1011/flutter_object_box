@@ -14,12 +14,29 @@ class ViewOrdersScreen extends StatefulWidget {
 class _ViewOrdersScreenState extends State<ViewOrdersScreen> {
   @override
   Widget build(BuildContext context) {
+    // get all items in the box
+    List<OrderModel> orders = widget.orderBox.getAll().reversed.toList();
     return Scaffold(
       appBar: AppBar(
         title: const Text("All Orders"),
       ),
       body: Column(
-        children: const [Expanded(child: Text("All"))],
+        children: [
+          Expanded(
+              child: ListView.builder(
+                  itemCount: orders.length,
+                  itemBuilder: (context, index) {
+                    // get single item per index
+                    OrderModel order = orders[index];
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 5),
+                      child: ExpansionTile(
+                        title: Text("Order no. #${order.id}"),
+                      ),
+                    );
+                  }))
+        ],
       ),
     );
   }
