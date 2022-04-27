@@ -122,8 +122,10 @@ class _OrderScreenState extends State<OrderScreen> {
     widget.orderBox.put(widget.orderModel!);
     setState(() {});
     _showTopFlash();
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const ViewOrdersScreen()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ViewOrdersScreen(orderBox: widget.orderBox)));
   }
 
   void _showTopFlash({FlashBehavior style = FlashBehavior.floating}) {

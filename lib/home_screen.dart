@@ -84,7 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ViewOrdersScreen()));
+                              builder: (context) => ViewOrdersScreen(
+                                    orderBox: orderBox!,
+                                  )));
                     },
                     child: const Text("View orders"))
               ],

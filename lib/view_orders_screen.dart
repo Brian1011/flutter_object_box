@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'model/order_model.dart';
+import 'objectbox.g.dart';
+
 class ViewOrdersScreen extends StatefulWidget {
-  const ViewOrdersScreen({Key? key}) : super(key: key);
+  final Box<OrderModel> orderBox;
+  const ViewOrdersScreen({required this.orderBox, Key? key}) : super(key: key);
 
   @override
   _ViewOrdersScreenState createState() => _ViewOrdersScreenState();
